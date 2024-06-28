@@ -1,0 +1,22 @@
+{
+  "name": "mv-bot",
+  "version": "1.0.0",
+  "description": "MV Bot for automation of tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miagao-Valley/mv-bot.git"
+  },
+  "author": "Miagao Valley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Miagao-Valley/mv-bot/issues"
+  },
+  "homepage": "https://github.com/Miagao-Valley/mv-bot#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
