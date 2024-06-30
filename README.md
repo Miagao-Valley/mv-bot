@@ -14,4 +14,4 @@ A bot that would automate most of the tasks in Miagao Valley.
 -   Express.js
 -   GitHub API
 -   Discord Bot API
--   MongoDB
+-   Firebase
