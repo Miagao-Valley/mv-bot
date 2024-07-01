@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Team Invite</title>
+
+        <link rel="stylesheet" href="/css/globals.css" />
+        <link rel="stylesheet" href="/css/github/invite/style.css" />
+        <link rel="stylesheet" href="/css/github/invite/form.css" />
+    </head>
+    <body>
+        <main>
+            <a href="<%- team.html_url %>" target="_blank">
+                <h1><%- team.name %></h1>
+            </a>
+            <form action="../invite" method="POST">
+                <label for="username">GitHub username</label>
+                <input
+                    required
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Enter GitHub username"
+                />
+                <input
+                    type="hidden"
+                    name="team_slug"
+                    value="<%- team.slug %>"
+                />
+                <input
+                    type="hidden"
+                    name="html_url"
+                    value="<%- team.html_url %>"
+                />
+                <button type="submit">Get invite</button>
+            </form>
+            <p class="info">
+                If you are not yet part of the
+                <span class="bold">Miagao Valley GitHub Organization</span>, you
+                will get an invitation via email (connected to your GitHub
+                account). After accepting, you will be
+                <span class="bold">automatically</span> included in this team.
+            </p>
+        </main>
+    </body>
+</html>

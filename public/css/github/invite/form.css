@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+main {
+    width: 400px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-top: 30px;
+    width: 100%;
+}
+
+input {
+    margin: 10px 0px 20px;
+    border: 0;
+}
+
+label {
+    color: rgb(68, 64, 64);
+}
+
+span {
+    color: rgb(68, 64, 64);
+    font-weight: bold;
+}
+
+.info {
+    width: 100%;
+    max-width: 450px;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 30px;
+    color: rgb(68, 64, 64);
+}
