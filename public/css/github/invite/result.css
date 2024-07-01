@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    height: 100vh;
+
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(68, 64, 64);
+    /* color: white; */
+    text-shadow: white 1px 1px 3px;
+}
+
+.fail {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#countdown {
+    font-size: 12px;
+
+    margin-top: 20px;
+}
