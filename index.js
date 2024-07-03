@@ -41,7 +41,7 @@ app.use(passport.session());
 
 app.use('/github', gitRouter);
 app.get('/', (req, res) => {
-    res.send(StatusCodes.OK);
+    res.sendStatus(StatusCodes.OK);
 });
 
 // Guard route
