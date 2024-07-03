@@ -19,7 +19,7 @@ export default passport.use(
         {
             clientID: process.env.GITHUB_CLIENT_ID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
-            callbackURL: 'http://localhost:3000/github/auth/callback',
+            callbackURL: 'https://bot.miagaovalley.site/github/auth/callback',
         },
         function (_accessToken, _refreshToken, profile, done) {
             done(null, profile);
