@@ -11,7 +11,6 @@ import { getInviteSanitizer, postInviteSanitizer } from '../utils/github.js';
 import bodyParser from 'body-parser';
 import '../strategies/github-strategy.js';
 import passport from 'passport';
-import { StatusCodes } from 'http-status-codes';
 
 const router = Router();
 

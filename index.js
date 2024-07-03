@@ -6,11 +6,17 @@ import session from 'express-session';
 import sqlite3 from 'connect-sqlite3';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import helmet from 'helmet';
 
 const PORT = process.env.PORT || 3000;
 const SQLiteStore = sqlite3(session);
 
 const app = express();
+
+// prod stuff
+app.use(compression());
+app.use(helmet());
 
 // serve static files (css, html, etc.)
 app.use(express.static('public'));

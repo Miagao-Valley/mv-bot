@@ -2,10 +2,10 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { getTeamByName, inviteUserToTeam } from '../services/github.js';
 
 export async function getInviteController(req, res) {
-    const teamName = req.teamName;
-    res.cookie('team', teamName, { maxAge: 60000 * 60, signed: true });
-
     try {
+        const teamName = req.teamName;
+        res.cookie('team', teamName, { maxAge: 60000 * 60, signed: true });
+
         const team = await getTeamByName(teamName);
         res.render('github/invite/form', { team: team, user: req.user });
     } catch (error) {
@@ -26,11 +26,13 @@ export async function getInviteController(req, res) {
 }
 
 export async function postInviteController(req, res) {
-    const team_slug = req.team_slug;
-    const username = req.user.username;
-    const team_url = req.team_url;
+    if (!req.user) return res.sendStatus(StatusCodes.UNAUTHORIZED);
 
     try {
+        const team_slug = req.team_slug;
+        const username = req.user.username;
+        const team_url = req.team_url;
+
         await inviteUserToTeam(team_slug, username);
 
         res.render('github/invite/result', {
@@ -42,7 +44,8 @@ export async function postInviteController(req, res) {
     } catch (error) {
         console.error(error);
 
-        res.render('github/invite/success', {
+        res.render('github/invite/result', {
+            redirect_url: team_url,
             success: false,
             error_status: error.status || '',
             error_message: error.message || '',
