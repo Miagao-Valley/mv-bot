@@ -40,6 +40,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/github', gitRouter);
+app.get('/', (req, res) => {
+    res.send(StatusCodes.OK);
+});
 
 // Guard route
 app.use((req, res) => {
