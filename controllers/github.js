@@ -3,10 +3,11 @@ import { getTeamByName, inviteUserToTeam } from '../services/github.js';
 
 export async function getInviteController(req, res) {
     const teamName = req.teamName;
+    res.cookie('team', teamName, { maxAge: 60000 * 60, signed: true });
 
     try {
         const team = await getTeamByName(teamName);
-        res.render('github/invite/form', { team: team });
+        res.render('github/invite/form', { team: team, user: req.user });
     } catch (error) {
         console.error(error.message);
 
@@ -26,7 +27,7 @@ export async function getInviteController(req, res) {
 
 export async function postInviteController(req, res) {
     const team_slug = req.team_slug;
-    const username = req.username;
+    const username = req.user.username;
     const team_url = req.team_url;
 
     try {
@@ -47,4 +48,34 @@ export async function postInviteController(req, res) {
             error_message: error.message || '',
         });
     }
+}
+
+export function authCallbackController(req, res) {
+    if (req.signedCookies?.team) {
+        return res.redirect(`/github/invite/${req.signedCookies.team}`);
+    }
+
+    res.sendStatus(StatusCodes.UNPROCESSABLE_ENTITY);
+}
+
+export function failAuthController(req, res) {
+    res.render('github/auth/fail');
+}
+
+export function logoutController(req, res) {
+    if (!req.user) return res.sendStatus(StatusCodes.UNAUTHORIZED);
+
+    req.logout((err) => {
+        if (err) {
+            return res
+                .status(StatusCodes.INTERNAL_SERVER_ERROR)
+                .json({ error: ReasonPhrases.INTERNAL_SERVER_ERROR });
+        }
+
+        if (req.signedCookies?.team) {
+            return res.redirect(`/github/invite/${req.signedCookies.team}`);
+        }
+
+        res.sendStatus(StatusCodes.OK);
+    });
 }

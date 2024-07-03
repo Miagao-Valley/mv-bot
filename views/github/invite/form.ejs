@@ -15,14 +15,20 @@
                 <h1><%- team.name %></h1>
             </a>
             <form action="../invite" method="POST">
-                <label for="username">GitHub username</label>
+                <label for="username">GitHub Username</label>
                 <input
+                    disabled
                     required
                     type="text"
                     name="username"
                     id="username"
-                    placeholder="Enter GitHub username"
+                    value="<%- user?.username ?? "Login to GitHub" %>"
                 />
+
+                <% if (user) { %>
+                    <a id="logout" href="/github/auth/logout">Logout?</a>
+                <% } %>
+
                 <input
                     type="hidden"
                     name="team_slug"
@@ -33,7 +39,12 @@
                     name="html_url"
                     value="<%- team.html_url %>"
                 />
-                <button type="submit">Get invite</button>
+
+                <% if (user) { %>
+                    <button type="submit">Get invite</button>
+                <% } else { %>
+                    <a id="login" href="/github/auth"><button type="button">Login to GitHub</button></a>
+                <% } %>
             </form>
             <p class="info">
                 If you are not yet part of the
