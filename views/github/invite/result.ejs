@@ -23,8 +23,10 @@
                     Please contact <span class="bold">Ezra Magbanua</span>, or report in 
                     <span><a href="https://discord.com/channels/1253331398560055396/1257273682661740576" target="_blank">Discord</a></span>
                 </p>
-            <% } else { %>
+            <% } else if (is_member) { %>
                 <p id="countdown">Redirecting in 3</p>
+            <% } else if (!is_member) { %>
+                <p>Please check your email for the invitation to the organization</p>
             <% } %>
         </main>
 
@@ -32,7 +34,7 @@
         <input type="hidden" id="error_status" value="<%- error_status %>" />
         <input type="hidden" id="error_message" value="<%- error_message %>" />
 
-        <% if (success) { %>
+        <% if (success && is_member) { %>
             <script type="text/javascript" src="/scripts/github/invite/redirect.js"></script>
         <% } %>
     </body>

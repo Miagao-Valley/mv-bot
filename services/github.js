@@ -37,3 +37,19 @@ export async function inviteUserToTeam(team_slug, username) {
         }
     );
 }
+
+// ref: https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user
+export async function isUserPartOfOrg(username) {
+    const result = await octokit.request(
+        `GET /orgs/${orgName}/members/${username}`,
+        {
+            org: orgName,
+            username: username,
+            headers: {
+                'X-GitHub-Api-Version': '2022-11-28',
+            },
+        }
+    );
+
+    return result.status === 204;
+}

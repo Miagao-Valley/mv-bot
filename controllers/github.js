@@ -1,5 +1,9 @@
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { getTeamByName, inviteUserToTeam } from '../services/github.js';
+import {
+    getTeamByName,
+    inviteUserToTeam,
+    isUserPartOfOrg,
+} from '../services/github.js';
 
 export async function getInviteController(req, res) {
     try {
@@ -34,12 +38,14 @@ export async function postInviteController(req, res) {
         const team_url = req.team_url;
 
         await inviteUserToTeam(team_slug, username);
+        const isOrgMember = await isUserPartOfOrg(username);
 
         res.render('github/invite/result', {
             redirect_url: team_url,
             success: true,
             error_status: '',
             error_message: '',
+            is_member: isOrgMember,
         });
     } catch (error) {
         console.error(error);
@@ -49,6 +55,7 @@ export async function postInviteController(req, res) {
             success: false,
             error_status: error.status || '',
             error_message: error.message || '',
+            is_member: false,
         });
     }
 }
